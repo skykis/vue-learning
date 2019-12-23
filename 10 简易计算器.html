@@ -13,13 +13,18 @@
 <body>
     <div id="app">
         <div>
-            <span>a:</span><input type="text" v-model.number="a">// .number 输入数据直接转成有效数字
+            <span>a:</span><input type="text" v-model.number="a">
+            <!--.number 输入数据直接转成有效数字-->
         </div>
         <div>
             <span>b:</span><input type="text" v-model.number="b">
         </div>
         <div>
-            <button @click="plus()">计算</button><span>结果：</span><span v-text="result"></span>
+            <button @click="plus()">+</button>
+            <button @click="minus()">-</button>
+            <button @click="times()">*</button>
+            <button @click="divide()">/</button>
+            <span>结果：</span><span v-text="result"></span>
         </div>
     </div>
     <script>
@@ -36,7 +41,16 @@
             methods: {
                 plus: function () {
                     this.result = this.a + this.b;
-                }
+                },
+                minus: function () {
+                    this.result = this.a - this.b;
+                },
+                times: function () {
+                    this.result = this.a * this.b;
+                },
+                divide: function () {
+                    this.result = this.a / this.b;
+                },
             },
         });
     </script>
