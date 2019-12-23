@@ -14,7 +14,8 @@
     <div id="app">
         <form action="" method="post">
             <div><span>name</span><input type="text" v-model="name" @keyup.delete="clear('name')"></div>
-            <div><span>pass</span><input type="text" v-model="pass" @keyup.enter="handle()" @keyup.delete="clear('pass')"></div>
+            <div><span>pass</span><input type="text" v-model="pass" @keyup.enter="handle()"
+                    @keyup.delete="clear('pass')"></div>
             <div><input type="button" @click="handle()" value="submit"></div>
         </form>
     </div>
