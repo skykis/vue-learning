@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Document</title>
+    <!--引入vue js库-->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <!--插值表达式 {{}}-->
+        <div>{{msg}}</div>
+        <!--v-model-->
+        <input type="text" v-model="msg" @keyup="handle">
+    </div>
+    <script>
+        "use strict";
+        Vue.config.keyCodes.a = 65
+        Vue.config.keyCodes = {
+            v: 86,
+            f1: 112,
+            // camelCase 不可用
+            mediaPlayPause: 179,
+            // 取而代之的是 kebab-case 且用双引号括起来
+            "media-play-pause": 179,
+            up: [38, 87]
+        }
+        // eslint-disable-next-line no-unused-vars
+        let nw = new Vue({
+            el: '#app',// 对象挂载元素id
+            data: {
+                // 数据模型
+                msg: ''
+            },
+            methods: {
+                handle: function (event) {
+                    console.log(event.keyCode);// 键盘的code
+                }
+            },
+        });
+    </script>
+</body>
+
+</html>
