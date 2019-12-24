@@ -7,15 +7,15 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<title>Document</title>
 	<!--引入vue js库-->
-	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </head>
 
 <body>
 	<div id="app">
 		<!--插值表达式 {{}}-->
-        <div>{{msg}}</div>
-        <!--v-once 只响应一次，可以提高性能-->
-        <div v-once>{{one}}</div>
+		<div>{{msg}}</div>
+		<!--v-once 只响应一次，可以提高性能-->
+		<div v-once>{{one}}</div>
 	</div>
 	<script>
 		"use strict";
@@ -24,8 +24,8 @@
 			el: '#app',// 对象挂载元素id
 			data: {
 				// 数据模型
-                msg: 'Hello World',
-                one: 'one info'
+				msg: 'Hello World',
+				one: 'one info'
 			},
 		});
 	</script>

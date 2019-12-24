@@ -7,18 +7,18 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<title>Document</title>
 	<!--引入vue js库-->
-	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </head>
 
 <body>
 	<div id="app">
-        <!--插值表达式 {{}}-->
-        <div>{{msg1}}</div>
-        <!--v-text等同 {{}} ，不存在闪动，不需要v-cloak-->
-        <div v-text="msg1"></div>
-        <div v-text="msg2"></div>
-        <div v-html="msg2"></div>
-        <div v-pre>{{msg1}}</div>
+		<!--插值表达式 {{}}-->
+		<div>{{msg1}}</div>
+		<!--v-text等同 {{}} ，不存在闪动，不需要v-cloak-->
+		<div v-text="msg1"></div>
+		<div v-text="msg2"></div>
+		<div v-html="msg2"></div>
+		<div v-pre>{{msg1}}</div>
 	</div>
 	<script>
 		"use strict";
@@ -28,7 +28,7 @@
 			data: {
 				// 数据模型
 				msg1: 'Hello World',
-                msg2: '<h1>HTML</h1>'
+				msg2: '<h1>HTML</h1>'
 			},
 		});
 	</script>
