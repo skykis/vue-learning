@@ -2,44 +2,44 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Document</title>
-    <!--引入vue js库-->
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<title>Document</title>
+	<!--引入vue js库-->
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </head>
 
 <body>
-    <div id="app">
-        <!--插值表达式 {{}}-->
-        <div>{{num}}</div>
-        <button v-on:click="num++">v-on点击</button>
-        <button @click="num++">简写@</button>
-        <button @click="handle">方法名</button>
-        <!--默认参数$event-->
-        <button @click="handle(123,456,$event)">函数式</button>
-    </div>
-    <script>
-        "use strict";
-        // eslint-disable-next-line no-unused-vars
-        let nw = new Vue({
-            el: '#app',// 对象挂载元素id
-            data: {
-                // 数据模型
-                num: 0
-            },
-            methods: {
-                // 定义方法
-                handle: function (param1, param2, event) {
-                    console.log(this === nw);
-                    console.log(param1, param2);
-                    console.log(event.target.tagName);
-                    this.num++;// this===nw
-                },
-            },
-        });
-    </script>
+	<div id="app">
+		<!--插值表达式 {{}}-->
+		<div>{{num}}</div>
+		<button v-on:click="num++">v-on点击</button>
+		<button @click="num++">简写@</button>
+		<button @click="handle">方法名</button>
+		<!--默认参数$event-->
+		<button @click="handle(123,456,$event)">函数式</button>
+	</div>
+	<script>
+		"use strict";
+		// eslint-disable-next-line no-unused-vars
+		let nw = new Vue({
+			el: '#app',// 对象挂载元素id
+			data: {
+				// 数据模型
+				num: 0
+			},
+			methods: {
+				// 定义方法
+				handle: function (param1, param2, event) {
+					console.log(this === nw);
+					console.log(param1, param2);
+					console.log(event.target.tagName);
+					this.num++;// this===nw
+				},
+			},
+		});
+	</script>
 </body>
 
 </html>

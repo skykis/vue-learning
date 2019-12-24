@@ -2,58 +2,58 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Document</title>
-    <!--引入vue js库-->
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<title>Document</title>
+	<!--引入vue js库-->
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </head>
 
 <body>
-    <div id="app">
-        <div>
-            <span>a:</span><input type="text" v-model.number="a">
-            <!--.number 输入数据直接转成有效数字-->
-        </div>
-        <div>
-            <span>b:</span><input type="text" v-model.number="b">
-        </div>
-        <div>
-            <button @click="plus()">+</button>
-            <button @click="minus()">-</button>
-            <button @click="times()">*</button>
-            <button @click="divide()">/</button>
-            <span>结果：</span><span v-text="result"></span>
-        </div>
-    </div>
-    <script>
-        "use strict";
-        // eslint-disable-next-line no-unused-vars
-        let nw = new Vue({
-            el: '#app',// 对象挂载元素id
-            data: {
-                // 数据模型
-                a: '',
-                b: '',
-                result: ''
-            },
-            methods: {
-                plus: function () {
-                    this.result = this.a + this.b;
-                },
-                minus: function () {
-                    this.result = this.a - this.b;
-                },
-                times: function () {
-                    this.result = this.a * this.b;
-                },
-                divide: function () {
-                    this.result = this.a / this.b;
-                },
-            },
-        });
-    </script>
+	<div id="app">
+		<div>
+			<span>a:</span><input type="text" v-model.number="a">
+			<!--.number 输入数据直接转成有效数字-->
+		</div>
+		<div>
+			<span>b:</span><input type="text" v-model.number="b">
+		</div>
+		<div>
+			<button @click="plus()">+</button>
+			<button @click="minus()">-</button>
+			<button @click="times()">*</button>
+			<button @click="divide()">/</button>
+			<span>结果：</span><span v-text="result"></span>
+		</div>
+	</div>
+	<script>
+		"use strict";
+		// eslint-disable-next-line no-unused-vars
+		let nw = new Vue({
+			el: '#app',// 对象挂载元素id
+			data: {
+				// 数据模型
+				a: '',
+				b: '',
+				result: ''
+			},
+			methods: {
+				plus: function () {
+					this.result = this.a + this.b;
+				},
+				minus: function () {
+					this.result = this.a - this.b;
+				},
+				times: function () {
+					this.result = this.a * this.b;
+				},
+				divide: function () {
+					this.result = this.a / this.b;
+				},
+			},
+		});
+	</script>
 </body>
 
 </html>
