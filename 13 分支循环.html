@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Document</title>
+    <!--引入vue js库-->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <div v-if="score>=90">优秀</div>
+        <div v-else-if="score<90&&score>=80">良好</div>
+        <div v-else-if="score<80&&score>=60">合格</div>
+        <div v-else>不合格</div>
+        <div v-show="score>=90">优秀</div>
+        <div v-show="score<90&&score>=80">良好</div>
+        <div v-show="score<80&&score>=60">合格</div>
+        <div v-show="score<60">不合格</div>
+        <ul>
+            <li v-for="item in fruits">{{item}}</li>
+        </ul>
+        <ul>
+            <li v-for="(item, index) in fruits" :key="index">{{item + index}}</li>
+        </ul>
+        <ul>
+            <li v-for="(item, index) in fruitsName" :key="index">
+                <span>{{item.eName}}</span>
+                <span>{{item.cName}}</span>
+            </li>
+        </ul>
+        <div v-for="(value, key, index) in obj" :key="index">{{value + "---" + key + "---" + index}}</div>
+    </div>
+    <script>
+        "use strict";
+        // eslint-disable-next-line no-unused-vars
+        let nw = new Vue({
+            el: '#app',// 对象挂载元素id
+            data: {
+                // 数据模型
+                score: 100,
+                fruits: ['apple', 'orange', 'banana', 'apple'],
+                fruitsName: [{ eName: 'apple', cName: '苹果' }, { eName: 'orange', cName: '橘子' }, { eName: 'banana', cName: '香蕉' }],
+                obj: { uName: 'lisi', age: 12, gender: 'male' }
+            },
+        });
+    </script>
+</body>
+
+</html>
