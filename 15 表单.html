@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Document</title>
+    <!--引入vue js库-->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style type="text/css">
+        form div {
+            height: 40px;
+            line-height: 40px;
+        }
+
+        form div:nth-child(4) {
+            height: auto;
+        }
+
+        form div span:first-child {
+            display: inline-block;
+            width: 100px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <form>
+            <div>
+                <span>姓名：</span>
+                <span>
+                    <input type="text" v-model="user.name">
+                </span>
+            </div>
+            <div>
+                <span>性别：</span>
+                <span>
+                    <input type="radio" value="male" v-model="user.gander">
+                    <label for="male">男</label>
+                    <input type="radio" value="female" v-model="user.gander">
+                    <label for="female">女</label>
+                </span>
+            </div>
+            <div>
+                <span>爱好：</span>
+                <input type="checkbox" value="ball" v-model="user.interest">
+                <label for="ball">篮球</label>
+                <input type="checkbox" value="sing" v-model="user.interest">
+                <label for="sing">唱歌</label>
+                <input type="checkbox" value="code" v-model="user.interest">
+                <label for="code">写代码</label>
+            </div>
+            <div>
+                <span>职业：</span>
+                <select v-model="user.job" multiple>
+                    <option value="">请选择职业...</option>
+                    <option value="teacher">教师</option>
+                    <option value="soft engineer">软件工程师</option>
+                    <option value="lawyer">律师</option>
+                </select>
+            </div>
+            <div>
+                <span>个人简介：</span>
+                <textarea v-model="user.info"></textarea>
+            </div>
+            <div><input type="submit" value="提交" @click.prevent="handle()"></div>
+        </form>
+    </div>
+    <script>
+        "use strict";
+        // eslint-disable-next-line no-unused-vars
+        let nw = new Vue({
+            el: '#app',// 对象挂载元素id
+            data: {
+                // 数据模型
+                user: { name: 'lisi', gander: 'male', interest: ['ball'], job: [], info: "..." },
+            },
+            methods: {
+                handle: function () {
+                    console.log(this.user);
+                }
+            },
+        });
+    </script>
+</body>
+
+</html>
