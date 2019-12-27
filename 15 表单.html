@@ -14,7 +14,7 @@
             line-height: 40px;
         }
 
-        form div:nth-child(4) {
+        form div:nth-child(5) {
             height: auto;
         }
 
@@ -31,7 +31,15 @@
             <div>
                 <span>姓名：</span>
                 <span>
-                    <input type="text" v-model="user.name">
+                    <!--v-model.lazy input改变成change-->
+                    <input type="text" v-model.lazy="user.name">
+                </span>
+            </div>
+            <div>
+                <span>年龄：</span>
+                <span>
+                    <!--v-model.number 将可格式化为数字的内容格式化成数字-->
+                    <input type="text" v-model.number="user.age">
                 </span>
             </div>
             <div>
@@ -63,7 +71,8 @@
             </div>
             <div>
                 <span>个人简介：</span>
-                <textarea v-model="user.info"></textarea>
+                <!--v-model.trim 去除头尾空格-->
+                <textarea v-model.trim="user.info"></textarea>
             </div>
             <div><input type="submit" value="提交" @click.prevent="handle()"></div>
         </form>
@@ -75,7 +84,7 @@
             el: '#app',// 对象挂载元素id
             data: {
                 // 数据模型
-                user: { name: 'lisi', gander: 'male', interest: ['ball'], job: [], info: "..." },
+                user: { name: 'lisi', age: 0, gander: 'male', interest: ['ball'], job: [], info: "..." },
             },
             methods: {
                 handle: function () {
