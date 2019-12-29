@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Document</title>
+    <!--引入vue js库-->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <div>
+            <span>名：</span>
+            <span>
+                <input type="text" v-model="firstName">
+            </span>
+        </div>
+        <div>
+            <span>姓：</span>
+            <span>
+                <input type="text" v-model="lastName">
+            </span>
+        </div>
+        <div>{{fullName}}</div>
+        <div>
+            <span>用户名：</span>
+            <span>
+                <input type="text" v-model.lazy="userName">
+            </span>
+            <span>{{msg}}</span>
+        </div>
+    </div>
+    </div>
+    <script type="text/javascript">
+        "use strict";
+        // eslint-disable-next-line no-unused-vars
+        let nw = new Vue({
+            el: '#app',// 对象挂载元素id
+            data: {
+                // 数据模型
+                firstName: 'Jim',
+                lastName: 'Green',
+                fullName: 'Jim Green',
+                userName: '',
+                msg: ''
+            },
+            // 侦听器适合需要在数据变化时执行异步或开销较大的操作时
+            watch: {
+                // 等同于计算属性
+                // computed: {
+                //     fullName: function () {
+                //         return this.firstName + ' ' + this.lastName;
+                //     }
+                // },
+                firstName: function (val) {
+                    this.fullName = val + ' ' + this.lastName;
+                },
+                lastName: function (val) {
+                    this.fullName = this.firstName + ' ' + val;
+                },
+                userName: function (val) {
+                    this.checkName(val);
+                    this.msg = '正在验证';
+                },
+            },
+            methods: {
+                checkName: function (userName) {
+                    // 定时任务模拟ajax接口调用
+                    let that = this;
+                    setTimeout(() => {
+                        if (userName == 'admin') {
+                            that.msg = '用户名已经存在';
+                        } else {
+                            that.msg = '用户名可以使用';
+                        }
+                    }, 2000);
+                }
+            },
+        });
+    </script>
+</body>
+
+</html>
