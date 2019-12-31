@@ -175,6 +175,21 @@
                         // 方法2
                         this.books = this.books.filter(item => item.id != id);
                     }
+                },
+                checkInput: function (arg1, arg2) {
+                    if (this.flag) {
+                        if (arg1) {
+                            this.submitFlag = true;
+                        } else {
+                            this.submitFlag = false;
+                        }
+                    } else {
+                        if (arg2) {
+                            this.submitFlag = true;
+                        } else {
+                            this.submitFlag = false;
+                        }
+                    }
                 }
             },
             computed: {
@@ -195,37 +210,13 @@
                     //验证图书名称是否存在
                     let check = this.books.some(item => item.name == val || item.id == this.id);
                     let check2 = this.books.some(item => item.name == val);
-                    if (this.flag) {
-                        if (check2) {
-                            this.submitFlag = true;
-                        } else {
-                            this.submitFlag = false;
-                        }
-                    } else {
-                        if (check) {
-                            this.submitFlag = true;
-                        } else {
-                            this.submitFlag = false;
-                        }
-                    }
+                    this.checkInput(check2, check);
                 },
                 id: function (val) {
                     //验证图书名称是否存在id
                     let check = this.books.some(item => item.id == val || item.name == this.name);
                     let check2 = this.books.some(item => item.name == this.name);
-                    if (this.flag) {
-                        if (check2) {
-                            this.submitFlag = true;
-                        } else {
-                            this.submitFlag = false;
-                        }
-                    } else {
-                        if (check) {
-                            this.submitFlag = true;
-                        } else {
-                            this.submitFlag = false;
-                        }
-                    }
+                    this.checkInput(check2, check);
                 }
             },
             mounted() {
