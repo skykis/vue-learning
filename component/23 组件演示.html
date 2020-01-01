@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Document</title>
+    <!--引入vue js库-->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <button-counter></button-counter>
+        <button-counter></button-counter>
+        <button-counter></button-counter>
+        <hello-world-1></hello-world-1>
+        <hello-world-2></hello-world-2>
+        <hello-world-3></hello-world-3>
+    </div>
+    <script type="text/javascript">
+        "use strict";
+        // 全局组件注册，可以使用在所有vue对象下
+        // 组件命名规则：1.短横线。2.驼峰式（不推荐，驼峰式命名只能在字符串模板中使用）
+        Vue.component('button-counter', {
+            data: function () {
+                return {
+                    count: 0
+                }
+            },
+            // 模板需要是一个准确的根元素，例如被div包含，不能2个平行的button
+            template: `
+                <div>
+                    <button @click="handle()">点击了{{count}}次</button>
+                    <button>test</button>
+                </div>
+            `,
+            methods: {
+                handle: function () {
+                    this.count += 2;
+                }
+            },
+        });
+
+        let helloWorld2 = {
+            data: function () {
+                return {
+                    msg: 'HelloWorld2'
+                }
+            },
+            template: '<div>{{msg}}</div>'
+        };
+        let helloWorld3 = {
+            data: function () {
+                return {
+                    msg: 'HelloWorld3'
+                }
+            },
+            template: '<div>{{msg}}</div>'
+        };
+        // eslint-disable-next-line no-unused-vars
+        let nw = new Vue({
+            el: '#app',// 对象挂载元素id
+            data: {
+                // 数据模型
+            },
+            components: {
+                // 局部组件注册，直接写对象或者新建对象后引用都可以
+                'hello-world-1': {
+                    data: function () {
+                        return {
+                            msg: 'HelloWorld1'
+                        }
+                    },
+                    template: '<div>{{msg}}</div>'
+                },
+                'hello-world-2': helloWorld2,
+                'hello-world-3': helloWorld3,
+            }
+        });
+    </script>
+</body>
+
+</html>
