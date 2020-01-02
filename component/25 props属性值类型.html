@@ -18,7 +18,14 @@
     <script type="text/javascript">
         "use strict";
         Vue.component('menu-item', {
-            props: ['pstr', 'pnum', 'pboo', 'parr', 'pobj'],
+            // props: ['pstr', 'pnum', 'pboo', 'parr', 'pobj'],
+            props: {
+                pstr: String,
+                pnum: Number,
+                pboo: Boolean,
+                parr: Array,
+                pobj: Object
+            },
             template: `
                 <div>
                     <div>{{pstr}}</div>
