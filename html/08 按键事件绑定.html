@@ -1,46 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>Document</title>
+    <!--引入vue js库-->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
 
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-	<title>Document</title>
-	<!--引入vue js库-->
-	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-</head>
+  <body>
+    <div id="app">
+      <form action="" method="post">
+        <div>
+          <span>name</span><input type="text" v-model="name" @keyup.delete="clear('name')" />
+        </div>
+        <div><span>name</span><input type="text" v-model="name" @keyup.delete="name=''" /></div>
+        <div>
+          <span>pass</span
+          ><input
+            type="text"
+            v-model="pass"
+            @keyup.enter="handle()"
+            @keyup.delete="clear('pass')"
+          />
+        </div>
 
-<body>
-	<div id="app">
-		<form action="" method="post">
-			<div><span>name</span><input type="text" v-model="name" @keyup.delete="clear('name')"></div>
-			<div><span>name</span><input type="text" v-model="name" @keyup.delete="name=''"></div>
-			<div><span>pass</span><input type="text" v-model="pass" @keyup.enter="handle()"
-					@keyup.delete="clear('pass')"></div>
-			<div><input type="button" @click="handle()" value="submit"></div>
-		</form>
-	</div>
-	<script type="text/javascript">
-		"use strict";
-		// eslint-disable-next-line no-unused-vars
-		let nw = new Vue({
-			el: '#app',// 对象挂载元素id
-			data: {
-				// 数据模型
-				name: '',
-				pass: ''
-			},
-			methods: {
-				clear: function (params) {
-					console.log(params);
-					console.log(this);
-					console.log(this[params]);
-					this.$set(this, params, '');
-				},
-				handle: () => console.log(nw, nw.name, nw.pass)
-			},
-		});
-	</script>
-</body>
-
+        <div><input type="button" @click="handle()" value="submit" /></div>
+      </form>
+    </div>
+    <script type="text/javascript">
+      'use strict';
+      // eslint-disable-next-line no-unused-vars
+      let nw = new Vue({
+        el: '#app', // 对象挂载元素id
+        data: {
+          // 数据模型
+          name: '',
+          pass: '',
+        },
+        methods: {
+          clear: function(params) {
+            console.log(params);
+            console.log(this);
+            console.log(this[params]);
+            this.$set(this, params, '');
+          },
+          handle: () => console.log(nw, nw.name, nw.pass),
+        },
+      });
+    </script>
+  </body>
 </html>

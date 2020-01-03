@@ -1,37 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>Document</title>
+    <!--引入vue js库-->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
 
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-	<title>Document</title>
-	<!--引入vue js库-->
-	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-</head>
-
-<body>
-	<div id="app">
-		<!--插值表达式 {{}}-->
-		<div>{{msg1}}</div>
-		<!--v-text等同 {{}} ，不存在闪动，不需要v-cloak-->
-		<div v-text="msg1"></div>
-		<div v-text="msg2"></div>
-		<div v-html="msg2"></div>
-		<div v-pre>{{msg1}}</div>
-	</div>
-	<script type="text/javascript">
-		"use strict";
-		// eslint-disable-next-line no-unused-vars
-		let nw = new Vue({
-			el: '#app',// 对象挂载元素id
-			data: {
-				// 数据模型
-				msg1: 'Hello World',
-				msg2: '<h1>HTML</h1>'
-			},
-		});
-	</script>
-</body>
-
+  <body>
+    <div id="app">
+      <!--插值表达式 {{}}-->
+      <div>{{msg1}}</div>
+      <!--v-text等同 {{}} ，不存在闪动，不需要v-cloak-->
+      <div v-text="msg1"></div>
+      <div v-text="msg2"></div>
+      <div v-html="msg2"></div>
+      <div v-pre>{{msg1}}</div>
+    </div>
+    <script type="text/javascript">
+      'use strict';
+      // eslint-disable-next-line no-unused-vars
+      let nw = new Vue({
+        el: '#app', // 对象挂载元素id
+        data: {
+          // 数据模型
+          msg1: 'Hello World',
+          msg2: '<h1>HTML</h1>',
+        },
+      });
+    </script>
+  </body>
 </html>

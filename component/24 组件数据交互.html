@@ -1,46 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <title>Document</title>
     <!--引入vue js库-->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-</head>
+  </head>
 
-<body>
+  <body>
     <div id="app">
-        <div :style='{fontSize:fontSize + "px"}'>{{pmsg}}</div>
-        <menu-item menu-title='来自父组件的值' :parr='parr'></menu-item>
-        <menu-item :menu-title='ptitle' content-info='hello' :parr='parr' @enlarge-text='handle($event)'></menu-item>
-        <test-tom></test-tom>
-        <test-jerry></test-jerry>
-        <div>
-            <button @click='destroy'>销毁</button>
-        </div>
+      <div :style='{fontSize:fontSize + "px"}'>{{pmsg}}</div>
+      <menu-item menu-title="来自父组件的值" :parr="parr"></menu-item>
+      <menu-item
+        :menu-title="ptitle"
+        content-info="hello"
+        :parr="parr"
+        @enlarge-text="handle($event)"
+      ></menu-item>
+      <test-tom></test-tom>
+      <test-jerry></test-jerry>
+      <div>
+        <button @click="destroy">销毁</button>
+      </div>
     </div>
     <script type="text/javascript">
-        "use strict";
-        /**
-         * 组件数据交互
-         * 1.父组件向子组件传值 props
-         * 2.子组件直接向父组件传值(也就是子组件直接操作父组件传入的数据，会影响所有引用该父组件属性的子组件)，
-         * 但原则上不建议（单向数据流原则）
-         * 3.子组件通过自定义事件向父组件传递信息(可以携带参数$event)
-         * 4.非父子传递（事件中心 new Vue() $on $off $emit）
-         */
-        Vue.component('menu-item', {
-            // props 声明属性名驼峰式时父组件传入时需要用短横线式（menuTitle）
-            props: ['menuTitle', 'content-info', 'parr'],
-            data() {
-                return {
-                    msg: '子组件本身的数据'
-                }
-            },
-            // 模板中使用从父组件传来的变量不能使用短横线式（content-info）
-            template: `
+      'use strict';
+      /**
+       * 组件数据交互
+       * 1.父组件向子组件传值 props
+       * 2.子组件直接向父组件传值(也就是子组件直接操作父组件传入的数据，会影响所有引用该父组件属性的子组件)，
+       * 但原则上不建议（单向数据流原则）
+       * 3.子组件通过自定义事件向父组件传递信息(可以携带参数$event)
+       * 4.非父子传递（事件中心 new Vue() $on $off $emit）
+       */
+      Vue.component('menu-item', {
+        // props 声明属性名驼峰式时父组件传入时需要用短横线式（menuTitle）
+        props: ['menuTitle', 'content-info', 'parr'],
+        data() {
+          return {
+            msg: '子组件本身的数据',
+          };
+        },
+        // 模板中使用从父组件传来的变量不能使用短横线式（content-info）
+        template: `
                 <div>
                     <div>{{msg + "---" + menuTitle + "---" + contentInfo}}</div>
                     <ul>
@@ -50,80 +54,79 @@
                     <button @click='$emit("enlarge-text", 5)'>扩大父组件字体</button>
                     <button @click='$emit("enlarge-text", 10)'>扩大父组件字体</button>
                 </div>
-            `
-        });
-        // 事件中心
-        let hub = new Vue();
+            `,
+      });
+      // 事件中心
+      let hub = new Vue();
 
-        Vue.component('test-tom', {
-            data() {
-                return {
-                    num: 0
-                }
-            },
-            template: `
+      Vue.component('test-tom', {
+        data() {
+          return {
+            num: 0,
+          };
+        },
+        template: `
                 <div>
                     <div>tom:{{num}}</div>
                     <button @click='handle'>点击</button>
                 </div>
             `,
-            methods: {
-                handle: function () {
-                    // 触发兄弟组件的事件
-                    hub.$emit('jerry-event', 1);
-                }
-            },
-            mounted() {
-                hub.$on('tom-event', (val) => {
-                    this.num += val;
-                });
-            },
-        });
-        Vue.component('test-jerry', {
-            data() {
-                return {
-                    num: 0
-                }
-            },
-            template: `
+        methods: {
+          handle: function() {
+            // 触发兄弟组件的事件
+            hub.$emit('jerry-event', 1);
+          },
+        },
+        mounted() {
+          hub.$on('tom-event', val => {
+            this.num += val;
+          });
+        },
+      });
+      Vue.component('test-jerry', {
+        data() {
+          return {
+            num: 0,
+          };
+        },
+        template: `
                 <div>
                     <div>jerry:{{num}}</div>
                     <button @click='handle'>点击</button>
                 </div>
             `,
-            methods: {
-                handle: function () {
-                    // 触发兄弟组件的事件
-                    hub.$emit('tom-event', 2);
-                }
-            },
-            mounted() {
-                hub.$on('jerry-event', (val) => {
-                    this.num += val;
-                });
-            },
-        });
-        // eslint-disable-next-line no-unused-vars
-        let nw = new Vue({
-            el: '#app',// 对象挂载元素id
-            data: {
-                // 数据模型
-                pmsg: '父组件中内容',
-                ptitle: '动态传值',
-                parr: ['apple', 'orange', 'banana'],
-                fontSize: 10
-            },
-            methods: {
-                handle: function (e) {
-                    this.fontSize += e;
-                },
-                destroy: function () {
-                    hub.$off("tom-event");
-                    hub.$off("jerry-event");
-                }
-            },
-        });
+        methods: {
+          handle: function() {
+            // 触发兄弟组件的事件
+            hub.$emit('tom-event', 2);
+          },
+        },
+        mounted() {
+          hub.$on('jerry-event', val => {
+            this.num += val;
+          });
+        },
+      });
+      // eslint-disable-next-line no-unused-vars
+      let nw = new Vue({
+        el: '#app', // 对象挂载元素id
+        data: {
+          // 数据模型
+          pmsg: '父组件中内容',
+          ptitle: '动态传值',
+          parr: ['apple', 'orange', 'banana'],
+          fontSize: 10,
+        },
+        methods: {
+          handle: function(e) {
+            this.fontSize += e;
+          },
+          destroy: function() {
+            hub.$off('tom-event');
+            hub.$off('jerry-event');
+          },
+        },
+      });
     </script>
-</body>
-
+  </body>
 </html>

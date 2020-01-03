@@ -1,64 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <title>Document</title>
     <!--引入vue js库-->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-</head>
+  </head>
 
-<body>
+  <body>
     <div id="app">
-        <div>
-            <input type="text" v-model="fName">
-            <button @click="add">添加</button>
-            <button @click="del">删除</button>
-            <button @click="change">替换</button>
-        </div>
-        <ul>
-            <li v-for="(item, index) in list" :key="index">{{item}}</li>
-        </ul>
+      <div>
+        <input type="text" v-model="fName" />
+        <button @click="add">添加</button>
+        <button @click="del">删除</button>
+        <button @click="change">替换</button>
+      </div>
+      <ul>
+        <li v-for="(item, index) in list" :key="index">{{item}}</li>
+      </ul>
     </div>
     <script type="text/javascript">
-        "use strict";
-        // eslint-disable-next-line no-unused-vars
-        let nw = new Vue({
-            el: '#app',// 对象挂载元素id
-            data: {
-                // 数据模型
-                fName: '',
-                list: ['apple', 'orange', 'banana']
-            },
-            methods: {
-                add: function () {
-                    this.list.push(this.fName);
-                    // 变异方法（修改当前数组）
-                    // push()   在数组的末尾添加一个或多个元素 返回数组新长度
-                    // pop()    移除数组的最后一项，返回移除的项
-                    // shift()  移除数组的第一项，返回移除项
-                    // unshift()    在数组的第一项前面添加一个或多个元素，返回数组的长度
-                    // splice() 方法向/从数组中添加/删除项目，然后返回被删除的项目。
-                    // sort()   排序
-                    // reverse()    逆转
+      'use strict';
+      // eslint-disable-next-line no-unused-vars
+      let nw = new Vue({
+        el: '#app', // 对象挂载元素id
+        data: {
+          // 数据模型
+          fName: '',
+          list: ['apple', 'orange', 'banana'],
+        },
+        methods: {
+          add: function() {
+            this.list.push(this.fName);
+            // 变异方法（修改当前数组）
+            // push()   在数组的末尾添加一个或多个元素 返回数组新长度
+            // pop()    移除数组的最后一项，返回移除的项
+            // shift()  移除数组的第一项，返回移除项
+            // unshift()    在数组的第一项前面添加一个或多个元素，返回数组的长度
+            // splice() 方法向/从数组中添加/删除项目，然后返回被删除的项目。
+            // sort()   排序
+            // reverse()    逆转
 
-                    // 替换方法（生成一个新的数组）
-                    // filter()、concat() 和 slice()
-                },
-                del: function () {
-                    this.list.pop();
-                },
-                change: function () {
-                    this.list = this.list.slice(0, 2);
-                }
-            },
-        });
-        // nw.list[1] = 'lemon';    非响应式修改
-        Vue.set(nw.list, 1, 'lemon');
-        nw.$set(nw.list, 2, 'cherry');
+            // 替换方法（生成一个新的数组）
+            // filter()、concat() 和 slice()
+          },
+          del: function() {
+            this.list.pop();
+          },
+          change: function() {
+            this.list = this.list.slice(0, 2);
+          },
+        },
+      });
+      // nw.list[1] = 'lemon';    非响应式修改
+      Vue.set(nw.list, 1, 'lemon');
+      nw.$set(nw.list, 2, 'cherry');
     </script>
-</body>
-
+  </body>
 </html>

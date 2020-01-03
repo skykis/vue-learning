@@ -1,240 +1,241 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <title>Document</title>
     <!--引入vue js库-->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <style type="text/css">
-        .grid {
-            margin: auto;
-            width: 500px;
-            text-align: center;
-        }
+      .grid {
+        margin: auto;
+        width: 500px;
+        text-align: center;
+      }
 
-        .grid table {
-            border-top: 1px solid #C2D89A;
-            width: 100%;
-            border-collapse: collapse;
-        }
+      .grid table {
+        border-top: 1px solid #c2d89a;
+        width: 100%;
+        border-collapse: collapse;
+      }
 
-        .grid th,
-        td {
-            padding: 10;
-            border: 1px dashed #f3dcab;
-            height: 35px;
-            line-height: 35px;
-        }
+      .grid th,
+      td {
+        padding: 10;
+        border: 1px dashed #f3dcab;
+        height: 35px;
+        line-height: 35px;
+      }
 
-        .grid th {
-            background-color: #f3dcab;
-        }
+      .grid th {
+        background-color: #f3dcab;
+      }
 
-        .grid .book {
-            padding-bottom: 10px;
-            padding-top: 5px;
-            background-color: #f3dcab;
-        }
+      .grid .book {
+        padding-bottom: 10px;
+        padding-top: 5px;
+        background-color: #f3dcab;
+      }
 
-        .grid .total {
-            height: 30px;
-            line-height: 30px;
-            background-color: #f3dcab;
-            border-top: 1px solid #C2D89A;
-        }
+      .grid .total {
+        height: 30px;
+        line-height: 30px;
+        background-color: #f3dcab;
+        border-top: 1px solid #c2d89a;
+      }
     </style>
-</head>
+  </head>
 
-<body>
+  <body>
     <div id="app">
-        <div class="grid">
+      <div class="grid">
+        <div>
+          <h1>图书管理</h1>
+          <div class="book">
             <div>
-                <h1>图书管理</h1>
-                <div class="book">
-                    <div>
-                        <label for="id">编号:</label>
-                        <input type="text" id="id" v-model="id" :disabled="flag" v-focus>
-                        <label for="name">名称:</label>
-                        <input type="text" id="name" v-model="name">
-                        <button @click="handle()" :disabled="submitFlag">提交</button>
-                    </div>
-                </div>
+              <label for="id">编号:</label>
+              <input type="text" id="id" v-model="id" :disabled="flag" v-focus />
+              <label for="name">名称:</label>
+              <input type="text" id="name" v-model="name" />
+              <button @click="handle()" :disabled="submitFlag">提交</button>
             </div>
-            <div class="total">
-                <span>图书总数:</span>
-                <span v-text="total"></span>
-            </div>
-            <table>
-                <thead>
-                    <tr>
-                        <th>编号</th>
-                        <th>名称</th>
-                        <th>时间</th>
-                        <th>操作</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr v-for="(item, index) in books" :key="item.id">
-                        <td v-text="item.id"></td>
-                        <td v-text="item.name"></td>
-                        <td v-text="$options.filters.format(item.date, 'yyyy-mm-dd HH:MM:SS')"></td>
-                        <td>
-                            <a href="" @click.prevent="toEdit(item.id)">修改</a>
-                            <span>|</span>
-                            <a href="" @click.prevent="delBook(item.id)">删除</a>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+          </div>
         </div>
+        <div class="total">
+          <span>图书总数:</span>
+          <span v-text="total"></span>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>编号</th>
+              <th>名称</th>
+              <th>时间</th>
+              <th>操作</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="(item, index) in books" :key="item.id">
+              <td v-text="item.id"></td>
+              <td v-text="item.name"></td>
+              <td v-text="$options.filters.format(item.date, 'yyyy-mm-dd HH:MM:SS')"></td>
+              <td>
+                <a href="" @click.prevent="toEdit(item.id)">修改</a>
+                <span>|</span>
+                <a href="" @click.prevent="delBook(item.id)">删除</a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
     <script type="text/javascript">
-        "use strict";
-        // eslint-disable-next-line no-unused-vars
-        let nw = new Vue({
-            el: '#app',// 对象挂载元素id
-            data: {
-                // 数据模型
-                id: '',
-                name: '',
-                books: [],
-                flag: false,
-                submitFlag: false
-            },
-            filters: {
-                format: (value, arg1) => {
-                    // 第一个参数value代表传入过滤器的变量，第二个参数arg1开始，代表传入过滤器的参数
-                    if (typeof value === "string") {
-                        let mts = value.match(/(\/Date\((\d+)\)\/)/);
-                        if (mts && mts.length >= 3) {
-                            value = parseInt(mts[2]);
-                        }
-                    } else {
-                        value = new Date(value);
-                    }
-                    let opt = {
-                        "y+": value.getFullYear().toString(),        // 年
-                        "m+": (value.getMonth() + 1).toString(),     // 月
-                        "d+": value.getDate().toString(),            // 日
-                        "H+": value.getHours().toString(),           // 时
-                        "M+": value.getMinutes().toString(),         // 分
-                        "S+": value.getSeconds().toString()          // 秒
-                        // 有其他格式化字符需求可以继续添加，必须转化成字符串
-                    };
-                    for (let k in opt) {
-                        let ret = new RegExp("(" + k + ")").exec(arg1);
-                        if (ret) {
-                            arg1 = arg1.replace(ret[1], (ret[1].length == 1) ? (opt[k]) : (opt[k].padStart(ret[1].length, "0")));
-                        }
-                    }
-                    return arg1;
-                },
-            },
-            methods: {
-                handle: function () {
-                    if (this.flag) {
-                        // 修改（根据当前id，更新数组中数据）
-                        this.books.some(item => {
-                            if (item.id == this.id) {
-                                item.name = this.name;
-                                return true;
-                            }
-                        })
-                        this.flag = false;
-                    } else {
-                        // 添加图书
-                        let book = {};
-                        book.id = this.id;
-                        book.name = this.name;
-                        book.date = new Date();
-                        this.books.push(book);
-                    }
-                    this.id = '';
-                    this.name = '';
-                },
-                toEdit: function (id) {
-                    // 禁止修改id
-                    this.flag = true;
-                    // 根据id查询出要编辑的数据
-                    let book = this.books.filter(item => item.id == id);
-                    this.id = book[0].id;
-                    this.name = book[0].name;
-                },
-                delBook: function (id) {
-                    // 根据id删除数据
-                    if (this.flag) {
-                        alert("请先完成修改后进行删除");
-                    } else {
-                        // 方法1
-                        // let index = this.books.findIndex(item => item.id == id);
-                        // this.books.splice(index, 1);
-                        // ----------------------------
-                        // 方法2
-                        this.books = this.books.filter(item => item.id != id);
-                    }
-                },
-                checkInput: function (arg1, arg2) {
-                    if (this.flag) {
-                        if (arg1) {
-                            this.submitFlag = true;
-                        } else {
-                            this.submitFlag = false;
-                        }
-                    } else {
-                        if (arg2) {
-                            this.submitFlag = true;
-                        } else {
-                            this.submitFlag = false;
-                        }
-                    }
+      'use strict';
+      // eslint-disable-next-line no-unused-vars
+      let nw = new Vue({
+        el: '#app', // 对象挂载元素id
+        data: {
+          // 数据模型
+          id: '',
+          name: '',
+          books: [],
+          flag: false,
+          submitFlag: false,
+        },
+        filters: {
+          format: (value, arg1) => {
+            // 第一个参数value代表传入过滤器的变量，第二个参数arg1开始，代表传入过滤器的参数
+            if (typeof value === 'string') {
+              let mts = value.match(/(\/Date\((\d+)\)\/)/);
+              if (mts && mts.length >= 3) {
+                value = parseInt(mts[2]);
+              }
+            } else {
+              value = new Date(value);
+            }
+            let opt = {
+              'y+': value.getFullYear().toString(), // 年
+              'm+': (value.getMonth() + 1).toString(), // 月
+              'd+': value.getDate().toString(), // 日
+              'H+': value.getHours().toString(), // 时
+              'M+': value.getMinutes().toString(), // 分
+              'S+': value.getSeconds().toString(), // 秒
+              // 有其他格式化字符需求可以继续添加，必须转化成字符串
+            };
+            for (let k in opt) {
+              let ret = new RegExp('(' + k + ')').exec(arg1);
+              if (ret) {
+                arg1 = arg1.replace(
+                  ret[1],
+                  ret[1].length == 1 ? opt[k] : opt[k].padStart(ret[1].length, '0')
+                );
+              }
+            }
+            return arg1;
+          },
+        },
+        methods: {
+          handle: function() {
+            if (this.flag) {
+              // 修改（根据当前id，更新数组中数据）
+              this.books.some(item => {
+                if (item.id == this.id) {
+                  item.name = this.name;
+                  return true;
                 }
+              });
+              this.flag = false;
+            } else {
+              // 添加图书
+              let book = {};
+              book.id = this.id;
+              book.name = this.name;
+              book.date = new Date();
+              this.books.push(book);
+            }
+            this.id = '';
+            this.name = '';
+          },
+          toEdit: function(id) {
+            // 禁止修改id
+            this.flag = true;
+            // 根据id查询出要编辑的数据
+            let book = this.books.filter(item => item.id == id);
+            this.id = book[0].id;
+            this.name = book[0].name;
+          },
+          delBook: function(id) {
+            // 根据id删除数据
+            if (this.flag) {
+              alert('请先完成修改后进行删除');
+            } else {
+              // 方法1
+              // let index = this.books.findIndex(item => item.id == id);
+              // this.books.splice(index, 1);
+              // ----------------------------
+              // 方法2
+              this.books = this.books.filter(item => item.id != id);
+            }
+          },
+          checkInput: function(arg1, arg2) {
+            if (this.flag) {
+              if (arg1) {
+                this.submitFlag = true;
+              } else {
+                this.submitFlag = false;
+              }
+            } else {
+              if (arg2) {
+                this.submitFlag = true;
+              } else {
+                this.submitFlag = false;
+              }
+            }
+          },
+        },
+        computed: {
+          total: function() {
+            return this.books.length;
+          },
+        },
+        directives: {
+          focus: {
+            // inserted：被绑定元素插入父节点时调用 (仅保证父节点存在，但不一定已被插入文档中)。
+            inserted: function(el) {
+              el.focus();
             },
-            computed: {
-                total: function () {
-                    return this.books.length;
-                }
-            },
-            directives: {
-                focus: {
-                    // inserted：被绑定元素插入父节点时调用 (仅保证父节点存在，但不一定已被插入文档中)。
-                    inserted: function (el) {
-                        el.focus();
-                    }
-                },
-            },
-            watch: {
-                name: function (val) {
-                    //验证图书名称是否存在
-                    let check = this.books.some(item => item.name == val || item.id == this.id);
-                    let check2 = this.books.some(item => item.name == val);
-                    this.checkInput(check2, check);
-                },
-                id: function (val) {
-                    //验证图书名称是否存在id
-                    let check = this.books.some(item => item.id == val || item.name == this.name);
-                    let check2 = this.books.some(item => item.name == this.name);
-                    this.checkInput(check2, check);
-                }
-            },
-            mounted() {
-                console.group('mounted 挂载结束状态===============》');
-                console.log("%c%s", "color:red", "el     : " + this.$el); //已被初始化
-                console.log(this.$el);
-                console.log("%c%s", "color:red", "data   : " + JSON.stringify(this.$data)); //已被初始化
-                console.log("%c%s", "color:red", "message: " + this.message); //已被初始化 
-                let date = [
-                    { id: 1, name: '三国演义', date: 2525609975000 },
-                    { id: 2, name: '水浒传', date: 2525609975000 },
-                    { id: 3, name: '红楼梦', date: 2525609975000 },
-                    { id: 4, name: '西游记', date: 2525609975000 }
-                ]
-                this.books = date;
-            },
-        });
+          },
+        },
+        watch: {
+          name: function(val) {
+            //验证图书名称是否存在
+            let check = this.books.some(item => item.name == val || item.id == this.id);
+            let check2 = this.books.some(item => item.name == val);
+            this.checkInput(check2, check);
+          },
+          id: function(val) {
+            //验证图书名称是否存在id
+            let check = this.books.some(item => item.id == val || item.name == this.name);
+            let check2 = this.books.some(item => item.name == this.name);
+            this.checkInput(check2, check);
+          },
+        },
+        mounted() {
+          console.group('mounted 挂载结束状态===============》');
+          console.log('%c%s', 'color:red', 'el     : ' + this.$el); //已被初始化
+          console.log(this.$el);
+          console.log('%c%s', 'color:red', 'data   : ' + JSON.stringify(this.$data)); //已被初始化
+          console.log('%c%s', 'color:red', 'message: ' + this.message); //已被初始化
+          let date = [
+            { id: 1, name: '三国演义', date: 2525609975000 },
+            { id: 2, name: '水浒传', date: 2525609975000 },
+            { id: 3, name: '红楼梦', date: 2525609975000 },
+            { id: 4, name: '西游记', date: 2525609975000 },
+          ];
+          this.books = date;
+        },
+      });
     </script>
-</body>
-
+  </body>
 </html>

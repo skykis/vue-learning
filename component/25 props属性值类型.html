@@ -1,57 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <title>Document</title>
     <!--引入vue js库-->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-</head>
+  </head>
 
-<body>
+  <body>
     <div id="app">
-        <!-- 非字符串类型传入需要v-bind绑定 -->
-        <menu-item :pstr='pstr' :pnum='12' :pboo='true' :parr='parr' :pobj='pobj'></menu-item>
+      <!-- 非字符串类型传入需要v-bind绑定 -->
+      <menu-item :pstr="pstr" :pnum="12" :pboo="true" :parr="parr" :pobj="pobj"></menu-item>
     </div>
     <script type="text/javascript">
-        "use strict";
-        Vue.component('menu-item', {
-            // props: ['pstr', 'pnum', 'pboo', 'parr', 'pobj'],
-            props: {
-                pstr: String,
-                pnum: Number,
-                pboo: Boolean,
-                parr: Array,
-                pobj: Object
-            },
-            template: `
-                <div>
-                    <div>{{pstr}}</div>
-                    <div>{{typeof pnum}}</div>
-                    <div>{{typeof pboo}}</div>
-                    <ul>
-                        <li v-for='(item,index) in parr' :key='index'>{{item}}</li>
-                    </ul>
-                    <div>
-                        <span>{{pobj.name}}</span>
-                        <span>{{pobj.age}}</span>
-                    </div>
-                </div>
-            `
-        });
-        // eslint-disable-next-line no-unused-vars
-        let nw = new Vue({
-            el: '#app',// 对象挂载元素id
-            data: {
-                // 数据模型
-                pstr: 'Hello World',
-                parr: ['apple', 'orange'],
-                pobj: { name: 'lisi', age: 14 }
-            },
-        });
+      'use strict';
+      Vue.component('menu-item', {
+        // props: ['pstr', 'pnum', 'pboo', 'parr', 'pobj'],
+        props: {
+          pstr: String,
+          pnum: Number,
+          pboo: Boolean,
+          parr: Array,
+          pobj: Object,
+        },
+        template: `
+					<div>
+						<div>{{pstr}}</div>
+						<div>{{typeof pnum}}</div>
+						<div>{{typeof pboo}}</div>
+						<ul>
+							<li v-for='(item,index) in parr' :key='index'>{{item}}</li>
+						</ul>
+						<div>
+							<span>{{pobj.name}}</span>
+							<span>{{pobj.age}}</span>
+						</div>
+					</div>
+				`,
+      });
+      // eslint-disable-next-line no-unused-vars
+      let nw = new Vue({
+        el: '#app', // 对象挂载元素id
+        data: {
+          // 数据模型
+          pstr: 'Hello World',
+          parr: ['apple', 'orange'],
+          pobj: { name: 'lisi', age: 14 },
+        },
+      });
     </script>
-</body>
-
+  </body>
 </html>
