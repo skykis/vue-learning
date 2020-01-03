@@ -19,36 +19,36 @@
       <div>{{reverseMethods()}}</div>
     </div>
     <script type="text/javascript">
-      'use strict';
+      'use strict'
       // eslint-disable-next-line no-unused-vars
       let nw = new Vue({
         el: '#app', // 对象挂载元素id
         data: {
           // 数据模型
-          msg: 'Hello World',
+          msg: 'Hello World'
         },
         // 计算属性用于替代任何复杂逻辑
         computed: {
           reverseComputed: function() {
             // 计算属性存在缓存，响应式依赖不变化时，不再次执行
-            console.log('computed');
+            console.log('computed')
             return this.msg
               .split('')
               .reverse()
-              .join('');
-          },
+              .join('')
+          }
         },
         methods: {
           reverseMethods: function() {
             // 方法每次调用都会执行，不存在缓存
-            console.log('methods');
+            console.log('methods')
             return this.msg
               .split('')
               .reverse()
-              .join('');
-          },
-        },
-      });
+              .join('')
+          }
+        }
+      })
     </script>
   </body>
 </html>

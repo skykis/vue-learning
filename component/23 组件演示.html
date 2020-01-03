@@ -19,14 +19,14 @@
       <hello-world-3></hello-world-3>
     </div>
     <script type="text/javascript">
-      'use strict';
+      'use strict'
       // 全局组件注册，可以使用在所有vue对象下
       // 组件命名规则：1.短横线。2.驼峰式（不推荐，驼峰式命名只能在字符串模板中使用）
       Vue.component('button-counter', {
         data: function() {
           return {
-            count: 0,
-          };
+            count: 0
+          }
         },
         // 模板需要是一个准确的根元素，例如被div包含，不能2个平行的button
         template: `
@@ -37,27 +37,27 @@
             `,
         methods: {
           handle: function() {
-            this.count += 2;
-          },
-        },
-      });
+            this.count += 2
+          }
+        }
+      })
 
       let helloWorld2 = {
         data: function() {
           return {
-            msg: 'HelloWorld2',
-          };
+            msg: 'HelloWorld2'
+          }
         },
-        template: '<div>{{msg}}</div>',
-      };
+        template: '<div>{{msg}}</div>'
+      }
       let helloWorld3 = {
         data: function() {
           return {
-            msg: 'HelloWorld3',
-          };
+            msg: 'HelloWorld3'
+          }
         },
-        template: '<div>{{msg}}</div>',
-      };
+        template: '<div>{{msg}}</div>'
+      }
       // eslint-disable-next-line no-unused-vars
       let nw = new Vue({
         el: '#app', // 对象挂载元素id
@@ -69,15 +69,15 @@
           'hello-world-1': {
             data: function() {
               return {
-                msg: 'HelloWorld1',
-              };
+                msg: 'HelloWorld1'
+              }
             },
-            template: '<div>{{msg}}</div>',
+            template: '<div>{{msg}}</div>'
           },
           'hello-world-2': helloWorld2,
-          'hello-world-3': helloWorld3,
-        },
-      });
+          'hello-world-3': helloWorld3
+        }
+      })
     </script>
   </body>
 </html>

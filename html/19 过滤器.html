@@ -18,50 +18,50 @@
       <div>{{date | format('yyyy-mm-dd HH:MM:SS', 'test2')}}</div>
     </div>
     <script type="text/javascript">
-      'use strict';
+      'use strict'
       // 过滤器用于格式化数据
       // 全局定义过滤器
       Vue.filter('upper', function(value) {
-        return value.charAt(0).toUpperCase() + value.slice(1);
-      });
+        return value.charAt(0).toUpperCase() + value.slice(1)
+      })
       // eslint-disable-next-line no-unused-vars
       let nw = new Vue({
         el: '#app', // 对象挂载元素id
         data: {
           // 数据模型
           msg: 'Hello World',
-          date: new Date(),
+          date: new Date()
         },
         // 局部定义过滤器
         filters: {
           lower: function(value) {
-            return value.charAt(0) + value.slice(1).toLowerCase();
+            return value.charAt(0) + value.slice(1).toLowerCase()
           },
           format: (value, arg1, arg2) => {
             // 第一个参数value代表传入过滤器的变量，第二个参数arg1开始，代表传入过滤器的参数
-            console.log(value, arg1, arg2);
+            console.log(value, arg1, arg2)
             let opt = {
               'y+': value.getFullYear().toString(), // 年
               'm+': (value.getMonth() + 1).toString(), // 月
               'd+': value.getDate().toString(), // 日
               'H+': value.getHours().toString(), // 时
               'M+': value.getMinutes().toString(), // 分
-              'S+': value.getSeconds().toString(), // 秒
+              'S+': value.getSeconds().toString() // 秒
               // 有其他格式化字符需求可以继续添加，必须转化成字符串
-            };
+            }
             for (let k in opt) {
-              let ret = new RegExp('(' + k + ')').exec(arg1);
+              let ret = new RegExp('(' + k + ')').exec(arg1)
               if (ret) {
                 arg1 = arg1.replace(
                   ret[1],
                   ret[1].length == 1 ? opt[k] : opt[k].padStart(ret[1].length, '0')
-                );
+                )
               }
             }
-            return arg1;
-          },
-        },
-      });
+            return arg1
+          }
+        }
+      })
     </script>
   </body>
 </html>

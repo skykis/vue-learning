@@ -30,25 +30,25 @@
       </form>
     </div>
     <script type="text/javascript">
-      'use strict';
+      'use strict'
       // eslint-disable-next-line no-unused-vars
       let nw = new Vue({
         el: '#app', // 对象挂载元素id
         data: {
           // 数据模型
           name: '',
-          pass: '',
+          pass: ''
         },
         methods: {
           clear: function(params) {
-            console.log(params);
-            console.log(this);
-            console.log(this[params]);
-            this.$set(this, params, '');
+            console.log(params)
+            console.log(this)
+            console.log(this[params])
+            this.$set(this, params, '')
           },
-          handle: () => console.log(nw, nw.name, nw.pass),
-        },
-      });
+          handle: () => console.log(nw, nw.name, nw.pass)
+        }
+      })
     </script>
   </body>
 </html>

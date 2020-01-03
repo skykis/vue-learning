@@ -33,7 +33,7 @@
       </div>
     </div>
     <script type="text/javascript">
-      'use strict';
+      'use strict'
       // eslint-disable-next-line no-unused-vars
       let nw = new Vue({
         el: '#app', // 对象挂载元素id
@@ -43,7 +43,7 @@
           lastName: 'Green',
           fullName: 'Jim Green',
           userName: '',
-          msg: '',
+          msg: ''
         },
         // 侦听器适合需要在数据变化时执行异步或开销较大的操作时
         watch: {
@@ -54,30 +54,30 @@
           //     }
           // },
           firstName: function(val) {
-            this.fullName = val + ' ' + this.lastName;
+            this.fullName = val + ' ' + this.lastName
           },
           lastName: function(val) {
-            this.fullName = this.firstName + ' ' + val;
+            this.fullName = this.firstName + ' ' + val
           },
           userName: function(val) {
-            this.checkName(val);
-            this.msg = '正在验证';
-          },
+            this.checkName(val)
+            this.msg = '正在验证'
+          }
         },
         methods: {
           checkName: function(userName) {
             // 定时任务模拟ajax接口调用
-            let that = this;
+            let that = this
             setTimeout(() => {
               if (userName == 'admin') {
-                that.msg = '用户名已经存在';
+                that.msg = '用户名已经存在'
               } else {
-                that.msg = '用户名可以使用';
+                that.msg = '用户名可以使用'
               }
-            }, 2000);
-          },
-        },
-      });
+            }, 2000)
+          }
+        }
+      })
     </script>
   </body>
 </html>

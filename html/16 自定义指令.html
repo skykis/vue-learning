@@ -15,7 +15,7 @@
       <input type="text" v-focus />
     </div>
     <script type="text/javascript">
-      'use strict';
+      'use strict'
       // 自定义指令
       // 全局定义
       Vue.directive('color', {
@@ -28,29 +28,29 @@
           // binding.expression：字符串形式的指令表达式。例如 v-my-directive="1 + 1" 中，表达式为 "1 + 1"。
           // binding.arg：传给指令的参数，可选。例如 v-my-directive:foo 中，参数为 "foo"。
           // binding.modifiers：一个包含修饰符的对象。例如：v-my-directive.foo.bar 中，修饰符对象为 { foo: true, bar: true }。
-          console.log(binding);
-          console.log(binding.value.color);
-          el.style.backgroundColor = binding.value.color;
-        },
-      });
+          console.log(binding)
+          console.log(binding.value.color)
+          el.style.backgroundColor = binding.value.color
+        }
+      })
       // eslint-disable-next-line no-unused-vars
       let nw = new Vue({
         el: '#app', // 对象挂载元素id
         data: {
           // 数据模型
-          msg: { color: 'orange' },
+          msg: { color: 'orange' }
         },
         // 局部定义自定义指令
         directives: {
           focus: {
             // inserted：被绑定元素插入父节点时调用 (仅保证父节点存在，但不一定已被插入文档中)。
             inserted: function(el) {
-              el.focus();
-            },
-          },
+              el.focus()
+            }
+          }
           // ...
-        },
-      });
+        }
+      })
     </script>
   </body>
 </html>

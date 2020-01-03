@@ -17,8 +17,8 @@
       <input type="text" type="text" v-model="msg" @keyup.v="handle" />
     </div>
     <script type="text/javascript">
-      'use strict';
-      Vue.config.keyCodes.a = 65;
+      'use strict'
+      Vue.config.keyCodes.a = 65
       Vue.config.keyCodes = {
         v: 86,
         f1: 112,
@@ -26,21 +26,21 @@
         mediaPlayPause: 179,
         // 取而代之的是 kebab-case 且用双引号括起来
         'media-play-pause': 179,
-        up: [38, 87],
-      };
+        up: [38, 87]
+      }
       // eslint-disable-next-line no-unused-vars
       let nw = new Vue({
         el: '#app', // 对象挂载元素id
         data: {
           // 数据模型
-          msg: '',
+          msg: ''
         },
         methods: {
           handle: function(event) {
-            console.log(event.keyCode); // 键盘的code
-          },
-        },
-      });
+            console.log(event.keyCode) // 键盘的code
+          }
+        }
+      })
     </script>
   </body>
 </html>

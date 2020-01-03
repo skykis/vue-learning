@@ -22,18 +22,18 @@
       </ul>
     </div>
     <script type="text/javascript">
-      'use strict';
+      'use strict'
       // eslint-disable-next-line no-unused-vars
       let nw = new Vue({
         el: '#app', // 对象挂载元素id
         data: {
           // 数据模型
           fName: '',
-          list: ['apple', 'orange', 'banana'],
+          list: ['apple', 'orange', 'banana']
         },
         methods: {
           add: function() {
-            this.list.push(this.fName);
+            this.list.push(this.fName)
             // 变异方法（修改当前数组）
             // push()   在数组的末尾添加一个或多个元素 返回数组新长度
             // pop()    移除数组的最后一项，返回移除的项
@@ -47,16 +47,16 @@
             // filter()、concat() 和 slice()
           },
           del: function() {
-            this.list.pop();
+            this.list.pop()
           },
           change: function() {
-            this.list = this.list.slice(0, 2);
-          },
-        },
-      });
+            this.list = this.list.slice(0, 2)
+          }
+        }
+      })
       // nw.list[1] = 'lemon';    非响应式修改
-      Vue.set(nw.list, 1, 'lemon');
-      nw.$set(nw.list, 2, 'cherry');
+      Vue.set(nw.list, 1, 'lemon')
+      nw.$set(nw.list, 2, 'cherry')
     </script>
   </body>
 </html>
