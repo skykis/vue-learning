@@ -11,7 +11,7 @@
     <div id="app"></div>
     <script type="text/javascript">
       'use strict'
-      function queryData(url) {
+      function queryData(url, startTime) {
         const p = new Promise((resolve, reject) => {
           const xhr = new XMLHttpRequest()
           xhr.onreadystatechange = function() {
@@ -19,9 +19,9 @@
               return
             }
             if (xhr.readyState == 4 && xhr.status == 200) {
-              resolve(xhr.responseText)
+              resolve([xhr.responseText, startTime])
             } else {
-              reject('error')
+              reject('error', startTime)
             }
           }
           xhr.open('get', url)
@@ -35,18 +35,22 @@
         params => console.log(params)
       )
       // 多次发送ajax，并且保证顺序
-      queryData('http://localhost:3000/data')
-        .then(params => {
-          console.log('第一次' + params)
+      const start1 = Date.now()
+      queryData('http://localhost:3000/data', Date.now())
+        .then(([params, startTime]) => {
+          const end = Date.now()
+          console.log('第一次' + params, end - startTime)
           // then方法返回Promise对象供下个then调用链使用
-          return queryData('http://localhost:3000/data1')
+          return queryData('http://localhost:3000/data1', Date.now())
         })
-        .then(params => {
-          console.log('第二次' + params)
-          return queryData('http://localhost:3000/data2')
+        .then(([params, startTime]) => {
+          const end = Date.now()
+          console.log('第二次' + params, end - startTime)
+          return queryData('http://localhost:3000/data2', Date.now())
         })
-        .then(params => {
-          console.log('第三次' + params)
+        .then(([params, startTime]) => {
+          const end = Date.now()
+          console.log('第三次' + params, end - startTime)
         })
     </script>
   </body>
