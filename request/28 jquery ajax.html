@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>Document</title>
+    <script type="text/javascript" src="../js/jquery-3.4.1.js"></script>
+  </head>
+
+  <body>
+    <div></div>
+    <script type="text/javascript">
+      'use strict'
+      let ret = '------------'
+      $.ajax({
+        url: 'http:localhost:3000/data',
+        success: function(data) {
+          console.log(data)
+          console.log(ret)
+        }
+      })
+      // 异步的执行和代码书写顺序无关
+      $.ajax({
+        url: 'http:localhost:3000/data',
+        success: function(data) {
+          console.log(data)
+        }
+      })
+      $.ajax({
+        url: 'http:localhost:3000/data1',
+        success: function(data) {
+          console.log(data)
+          console.log(ret)
+        }
+      })
+      $.ajax({
+        url: 'http:localhost:3000/data2',
+        success: function(data) {
+          console.log(data)
+        }
+      })
+
+      // 异步的嵌套
+      $.ajax({
+        url: 'http:localhost:3000/data',
+        success: function(data) {
+          console.log(data)
+          $.ajax({
+            url: 'http:localhost:3000/data1',
+            success: function(data) {
+              console.log(data)
+              $.ajax({
+                url: 'http:localhost:3000/data2',
+                success: function(data) {
+                  console.log(data)
+                }
+              })
+            }
+          })
+        }
+      })
+    </script>
+  </body>
+</html>
