@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <div id="app"></div>
+    <script type="text/javascript">
+      'use strict'
+      function foo() {
+        return new Promise((resolve, reject) => {
+          setTimeout(() => {
+            resolve(123)
+            reject('error')
+          }, 100)
+        })
+      }
+      foo()
+        .then(data => console.log(data)) // 第一个参数函数接收resolve方法参数，第二个参数函数接收reject方法参数
+        .catch(data => console.log(data)) // 直接接收reject方法参数，等价于then的第二个方法参数
+        .finally(() => console.log('finisher'))
+
+      /**
+       * all 并发处理多个异步，所有都执行完成得到结果
+       * race 并发处理多个异步，只要一个任务完成就得到结果
+       */
+      function queryData(url) {
+        return new Promise((resolve, reject) => {
+          const xhr = new XMLHttpRequest()
+          xhr.onreadystatechange = function() {
+            if (xhr.readyState != 4) {
+              return
+            }
+            if (xhr.readyState == 4 && xhr.status == 200) {
+              resolve(xhr.responseText)
+            } else {
+              reject('error')
+            }
+          }
+          xhr.open('get', url)
+          xhr.send(null)
+        })
+      }
+
+      const p1 = queryData('http://localhost:3000/a1')
+      const p2 = queryData('http://localhost:3000/a2')
+      const p3 = queryData('http://localhost:3000/a3')
+      const start = Date.now()
+      Promise.all([p1, p2, p3]).then(result => {
+        var end = Date.now()
+        console.log(result, end - start) //所有结果，运行总时间
+      })
+      Promise.race([p1, p2, p3]).then(result => console.log(result))
+    </script>
+  </body>
+</html>

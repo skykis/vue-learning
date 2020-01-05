@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <div id="app"></div>
+    <script type="text/javascript">
+      'use strict'
+      function queryData(url) {
+        const p = new Promise((resolve, reject) => {
+          const xhr = new XMLHttpRequest()
+          xhr.onreadystatechange = function() {
+            if (xhr.readyState != 4) {
+              return
+            }
+            if (xhr.readyState == 4 && xhr.status == 200) {
+              resolve(xhr.responseText)
+            } else {
+              reject('error')
+            }
+          }
+          xhr.open('get', url)
+          xhr.send(null)
+        })
+        return p
+      }
+      // 基本使用
+      queryData('http://localhost:3000/data').then(
+        params => console.log(params),
+        params => console.log(params)
+      )
+      // 多次发送ajax，并且保证顺序
+      queryData('http://localhost:3000/data')
+        .then(params => {
+          console.log('第一次' + params)
+          // then方法返回Promise对象供下个then调用链使用
+          return queryData('http://localhost:3000/data1')
+        })
+        .then(params => {
+          console.log('第二次' + params)
+          return queryData('http://localhost:3000/data2')
+        })
+        .then(params => {
+          console.log('第三次' + params)
+        })
+    </script>
+  </body>
+</html>
