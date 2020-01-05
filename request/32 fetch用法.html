@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <div id="app"></div>
+    <script type="text/javascript">
+      'use strict'
+      fetch('http://localhost:3000/fdata')
+        .then(response => {
+          console.log(response)
+          return response.text() // 根据类型选择具体方法
+        })
+        .then(text => console.log(text)) // 真正的返回
+      fetch('http://localhost:3000/json')
+        .then(response => {
+          console.log(response)
+          return response.json() // 根据类型选择具体方法
+        })
+        .then(json => console.log(json)) // 真正的返回
+
+      // 请求参数
+      // 传统get
+      fetch('http://localhost:3000/books?id=123', { method: 'get' })
+        .then(response => response.text())
+        .then(text => console.log(text))
+      // restful get
+      fetch('http://localhost:3000/books/456', { method: 'get' })
+        .then(response => response.text())
+        .then(text => console.log(text))
+      // restful delete
+      fetch('http://localhost:3000/books/789', { method: 'delete' })
+        .then(response => response.text())
+        .then(text => console.log(text))
+      // post 1
+      fetch('http://localhost:3000/books', {
+        method: 'post',
+        body: 'uname=lisi&pwd=123',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+      })
+        .then(response => response.text())
+        .then(text => console.log(text))
+      // post 2
+      fetch('http://localhost:3000/books', {
+        method: 'post',
+        body: JSON.stringify({ uname: 'zhangsan', pwd: '456' }),
+        headers: { 'Content-Type': 'application/json' }
+      })
+        .then(response => response.text())
+        .then(text => console.log(text))
+      // restful put
+      fetch('http://localhost:3000/books/789', {
+        method: 'put',
+        body: JSON.stringify({ uname: 'zhangsan', pwd: '456' }),
+        headers: { 'Content-Type': 'application/json' }
+      })
+        .then(response => response.text())
+        .then(text => console.log(text))
+    </script>
+  </body>
+</html>
