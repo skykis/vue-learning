@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>Document</title>
+    <script type="text/javascript" src="../js/axios.js"></script>
+  </head>
+
+  <body>
+    <div id="app"></div>
+    <script type="text/javascript">
+      'use strict'
+      // 请求拦截器
+      axios.interceptors.request.use(
+        config => {
+          // Do something before request is sent
+          console.log(config)
+          config.baseURL = 'http://localhost:3000/'
+          config.headers.mytoken = 'hello'
+          return config
+        },
+        error => {
+          // Do something with request error
+          console.error(error)
+          return Promise.reject(error)
+        }
+      )
+      // 响应拦截器
+      axios.interceptors.response.use(
+        response => {
+          // Do something before response is sent
+          console.log(response)
+          response = response.data
+          return response
+        },
+        error => {
+          // Do something with response error
+          console.error(error)
+          return Promise.reject(error)
+        }
+      )
+      axios.get('axios-json').then(res => console.log(res))
+    </script>
+  </body>
+</html>

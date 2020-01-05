@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>Document</title>
+    <script type="text/javascript" src="../js/axios.js"></script>
+  </head>
+
+  <body>
+    <div id="app"></div>
+    <script type="text/javascript">
+      'use strict'
+      // axios基本用法
+      axios.get('http://localhost:3000/adata').then(res => {
+        console.log(res)
+        console.log(res.data)
+      })
+      // 形参解构版本（个人认为没必要）
+      axios.get('http://localhost:3000/adata').then(({ data, status }) => {
+        console.log('形参解构data:' + data)
+        console.log('形参解构status:' + status)
+      })
+
+      // 参数传递
+      // 传统get
+      axios
+        .get('http://localhost:3000/axios?id=123')
+        .then(res => console.log('传统get:' + res.data))
+      // restful get
+      axios
+        .get('http://localhost:3000/axios/456')
+        .then(res => console.log('restful get:' + res.data))
+      // 通过params参数 get
+      axios
+        .get('http://localhost:3000/axios', {
+          params: { id: 789 }
+        })
+        .then(res => console.log('通过params参数 get:' + res.data))
+      // delete,与get类似
+      axios
+        .delete('http://localhost:3000/axios', {
+          params: { id: 789 }
+        })
+        .then(res => console.log('delete,与get类似:' + res.data))
+      // post json
+      axios
+        .post('http://localhost:3000/axios', { uname: 'zhangsan', pwd: '666' })
+        .then(res => console.log('post json:' + res.data))
+      //post 表单
+      const params = new URLSearchParams()
+      params.append('uname', 'lisi')
+      params.append('pwd', '555')
+      axios
+        .post('http://localhost:3000/axios', params)
+        .then(res => console.log('post 表单:' + res.data))
+      // restful put
+      axios
+        .put('http://localhost:3000/axios/777', { uname: 'zhangsan', pwd: '666' })
+        .then(res => console.log('restful put:' + res.data))
+
+      /**
+       * 响应结果主要属性
+       * data 实际响应返回数据
+       * headers 响应头
+       * status 响应状态码
+       * statusText 响应状态信息
+       */
+      axios.get('http://localhost:3000/axios-json').then(res => console.log(res))
+
+      // 全局配置项
+      axios.defaults.baseURL = 'http://localhost:3000/' // 基本URL
+      axios.defaults.headers['mytoken'] = 'hello' // 请求头
+      axios.defaults.timeout = 1000 // 超时时间
+      axios.get('axios-json').then(res => console.log(res))
+      axios.get('a3').then(res => console.log(res)) // 超时
+    </script>
+  </body>
+</html>
