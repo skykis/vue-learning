@@ -1,0 +1,36 @@
+.grid {
+  margin: auto;
+  width: 500px;
+  text-align: center;
+}
+
+.grid table {
+  border-top: 1px solid #c2d89a;
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.grid th,
+td {
+  padding: 10;
+  border: 1px dashed #f3dcab;
+  height: 35px;
+  line-height: 35px;
+}
+
+.grid th {
+  background-color: #f3dcab;
+}
+
+.grid .book {
+  padding-bottom: 10px;
+  padding-top: 5px;
+  background-color: #f3dcab;
+}
+
+.grid .total {
+  height: 30px;
+  line-height: 30px;
+  background-color: #f3dcab;
+  border-top: 1px solid #c2d89a;
+}
