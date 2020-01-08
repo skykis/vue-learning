@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>Document</title>
+    <!--引入vue js库-->
+    <script type="text/javascript" src="../js/vue.js"></script>
+  </head>
+
+  <body>
+    <div id="app">
+      <a href="#/zhuye" @click="change">主页</a>
+      <a href="#/keji" @click="change">科技</a>
+      <a href="#/caijing" @click="change">财经</a>
+      <a href="#/yule" @click="change">娱乐</a>
+      <!--component 的is属性可以把对应组件填充到componet标签的所在位置-->
+      <component :is="comName"></component>
+    </div>
+    <script type="text/javascript">
+      'use strict'
+      const zhuye = {
+        template: '<h1>主页信息</h1>'
+      }
+      const keji = {
+        template: '<h1>科技信息</h1>'
+      }
+      const caijing = {
+        template: '<h1>财经信息</h1>'
+      }
+      const yule = {
+        template: '<h1>娱乐信息</h1>'
+      }
+      // eslint-disable-next-line no-unused-vars
+      let nw = new Vue({
+        el: '#app', // 对象挂载元素id
+        data: { comName: 'zhuye' },
+        components: {
+          zhuye,
+          keji,
+          caijing,
+          yule
+        },
+        methods: {
+          change(event) {
+            this.comName = event.target.hash.slice(2)
+          }
+        }
+      })
+      // 监听最新的页面hash值
+      window.onhashchange = function() {
+        console.log(location.hash)
+      }
+    </script>
+  </body>
+</html>

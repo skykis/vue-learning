@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>Document</title>
+    <!--引入vue js库-->
+    <script type="text/javascript" src="../js/vue.js"></script>
+    <script type="text/javascript" src="../js/vue-router.js"></script>
+  </head>
+
+  <body>
+    <div id="app">
+      <router-link to="/user">User</router-link>
+      <router-link to="/register">Register</router-link>
+      <!--路由占位符-->
+      <router-view></router-view>
+    </div>
+    <script type="text/javascript">
+      'use strict'
+      const user = {
+        template: '<h1>User 组件</h1>'
+      }
+      const register = {
+        template: '<h1>Register 组件</h1>'
+      }
+      // 创建路由实例对象
+      const router = new VueRouter({
+        // 路由规则
+        routes: [
+          { path: '/user', component: user },
+          { path: '/register', component: register }
+        ]
+      })
+      // eslint-disable-next-line no-unused-vars
+      const vm = new Vue({
+        el: '#app',
+        data: {},
+        router //挂载路由实例对象，router: router可以简写成router
+      })
+    </script>
+  </body>
+</html>
