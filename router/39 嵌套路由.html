@@ -12,10 +12,14 @@
 
   <body>
     <div id="app">
-      <router-link to="/user">User</router-link>
-      <router-link to="/register">Register</router-link>
-      <!--路由占位符-->
-      <router-view></router-view>
+      <p>
+        <router-link to="/user">User</router-link>
+        <router-link to="/register">Register</router-link>
+      </p>
+      <div>
+        <!--父路由占位符-->
+        <router-view></router-view>
+      </div>
     </div>
     <script type="text/javascript">
       'use strict'
@@ -23,7 +27,22 @@
         template: '<h1>User 组件</h1>'
       }
       const register = {
-        template: '<h1>Register 组件</h1>'
+        template: `
+          <div>
+            <h1>Register 组件</h1>
+            <hr/>
+            <router-link to="/register/tab1">Tab1</router-link>
+            <router-link to="/register/tab2">Tab2</router-link>
+            <!--子路由占位符-->
+            <router-view></router-view>
+          </div>
+        `
+      }
+      const tab1 = {
+        template: '<h3>Tab1 组件</h3>'
+      }
+      const tab2 = {
+        template: '<h3>Tab2 组件</h3>'
       }
       // 创建路由实例对象
       const router = new VueRouter({
@@ -31,7 +50,16 @@
         routes: [
           { path: '/', redirect: '/user' }, // 路由重定向
           { path: '/user', component: user },
-          { path: '/register', component: register }
+          {
+            path: '/register',
+            component: register,
+            // 嵌套路由
+            children: [
+              // 支持相对路径和绝对路径
+              { path: 'tab1', component: tab1 },
+              { path: 'tab2', component: tab2 }
+            ]
+          }
         ]
       })
       // eslint-disable-next-line no-unused-vars
