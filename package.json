@@ -9,12 +9,17 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@babel/cli": "^7.7.7",
+    "@babel/core": "^7.7.7",
+    "@babel/node": "^7.7.7",
+    "@babel/preset-env": "^7.7.7",
     "eslint": "^6.8.0",
     "eslint-plugin-prettier": "^3.1.2",
     "eslint-plugin-vue": "^6.0.1",
     "prettier": "^1.19.1"
   },
   "dependencies": {
+    "@babel/polyfill": "^7.7.0",
     "eslint-plugin-html": "^6.0.0",
     "save-dev": "0.0.1-security"
   }
