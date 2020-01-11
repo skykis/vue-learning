@@ -39,6 +39,10 @@ module.exports = {
           fallback: 'style-loader',
           use: ['css-loader', 'sass-loader']
         })
+      },
+      {
+        test: /\.jpg|png|gif|bmp|ttf|eot|svg|woff|woff2$/,
+        use: 'url-loader?limit=16940'
       }
     ]
   }
