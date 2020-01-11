@@ -14,5 +14,8 @@ module.exports = {
     path: path.join(__dirname, './dist'),
     filename: 'bundle.js' // 输入文件的名称,默认main.js
   }, // 输出目录，默认值为 ./dist
-  plugins: [htmlPlugin]
+  plugins: [htmlPlugin],
+  module: {
+    rules: [{ test: /\.css$/, use: ['style-loader', 'css-loader'] }]
+  }
 }
