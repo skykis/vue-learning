@@ -1,6 +1,7 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
+// htmlPlugin插件配置
 const htmlPlugin = new HtmlWebpackPlugin({
   template: path.join(__dirname, './src/index.html'),
   filename: 'index.html'
