@@ -12,27 +12,21 @@
 
   <body>
     <div id="app">
-      <router-link to="/userInfo">UserInfo</router-link>
       <router-link to="/userInfo/1">UserInfo1</router-link>
       <router-link to="/userInfo/2">UserInfo2</router-link>
-      <router-link to="/userInfo/3">UserInfo3</router-link>
-      <router-link to="/user/1">User1</router-link>
-      <router-link to="/user/2">User2</router-link>
-      <router-link to="/user/3">User3</router-link>
-      <router-link to="/register/1">Register1</router-link>
-      <router-link to="/register/2">Register2</router-link>
-      <router-link to="/register/3">Register3</router-link>
+      <router-link :to="{ name : 'userInfo', params : { id : 3 }}">UserInfo3</router-link>
+      <router-link to="/user">User</router-link>
+      <router-link to="/register">Register</router-link>
       <!--路由占位符-->
       <router-view></router-view>
     </div>
     <script type="text/javascript">
       'use strict'
       const user = {
-        template: '<h1>User{{ $route.params.id }}组件</h1>'
+        template: '<h1>User组件</h1>'
       }
       const register = {
-        props: ['id'],
-        template: '<h1>Register{{ id }}组件</h1>'
+        template: '<h1>Register组件</h1>'
       }
       const userInfo = {
         props: ['id', 'name', 'age'],
@@ -43,14 +37,14 @@
         // 路由规则
         routes: [
           { path: '/', redirect: '/user' }, // 路由重定向s:true
-          { path: '/user/:id', component: user }, // 默认模式传参
-          { path: '/register/:id', component: register, props: true }, // props布尔模式传参
-          { path: '/userInfo', component: userInfo, props: { name: 'lisi', age: 20 } }, // props对象模式传参
+          { path: '/user', component: user },
+          { path: '/register', component: register },
           {
+            name: 'userInfo', // 命名路由
             path: '/userInfo/:id',
             component: userInfo,
             props: route => ({ name: 'zs', age: 44, id: route.params.id })
-          } // props函数模式传参
+          }
         ]
       })
       // eslint-disable-next-line no-unused-vars
