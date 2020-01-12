@@ -4,5 +4,8 @@ module.exports = {
     open: true,
     // 端口
     port: 8888
+  },
+  configureWebpack: {
+    devtool: 'source-map'
   }
 }
