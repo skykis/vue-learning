@@ -2,6 +2,8 @@ const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
+//用于在构建前清除dist目录中的内容
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
 // htmlPlugin插件配置
 const htmlPlugin = new HtmlWebpackPlugin({
@@ -18,7 +20,7 @@ module.exports = {
     path: path.join(__dirname, './dist'),
     filename: 'bundle.js' // 输入文件的名称,默认main.js
   }, // 输出目录，默认值为 ./dist
-  plugins: [htmlPlugin, extractText, new VueLoaderPlugin()],
+  plugins: [htmlPlugin, extractText, new VueLoaderPlugin(), new CleanWebpackPlugin()],
   module: {
     rules: [
       {
