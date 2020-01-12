@@ -3,7 +3,7 @@ module.exports = {
     // 编译完自动打开浏览器
     open: true,
     // 端口
-    port: 8888
+    port: 9999
   },
 
   configureWebpack: {
