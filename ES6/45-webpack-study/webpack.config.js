@@ -1,12 +1,14 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const VueLoaderPlugin = require('vue-loader/lib/plugin')
 
 // htmlPlugin插件配置
 const htmlPlugin = new HtmlWebpackPlugin({
   template: path.join(__dirname, './src/index.html'),
   filename: 'index.html'
 })
+// css构建去重
 const extractText = new ExtractTextPlugin('style.css')
 
 module.exports = {
@@ -16,7 +18,7 @@ module.exports = {
     path: path.join(__dirname, './dist'),
     filename: 'bundle.js' // 输入文件的名称,默认main.js
   }, // 输出目录，默认值为 ./dist
-  plugins: [htmlPlugin, extractText],
+  plugins: [htmlPlugin, extractText, new VueLoaderPlugin()],
   module: {
     rules: [
       {
@@ -48,6 +50,10 @@ module.exports = {
         test: /\.js$/,
         use: 'babel-loader',
         exclude: /node_modules/
+      },
+      {
+        test: /\.vue$/,
+        use: 'vue-loader'
       }
     ]
   }

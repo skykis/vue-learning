@@ -13,3 +13,13 @@ class Person {
 }
 
 console.log(Person.info)
+
+//----------------------------------------------------------
+import Vue from 'vue'
+//导入vue单文件组件
+import App from './components/App.vue'
+
+const vm = new Vue({
+  el: '#app',
+  render: h => h(App)
+})
