@@ -4,7 +4,7 @@ import router from './router/router'
 import './plugins/element'
 // 导入全局样式表
 import './assets/css/global.css'
-import axios from './router/axios'
+import axios from './plugins/axios'
 
 Vue.prototype.$axios = axios
 Vue.config.productionTip = false
