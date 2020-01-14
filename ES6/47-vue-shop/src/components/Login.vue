@@ -79,6 +79,10 @@ export default {
             return this.$message.error('登录失败：' + res.meta.msg)
           } else {
             this.$message.success('登录成功')
+            // 将token保存到sessionStorage中
+            window.sessionStorage.setItem('token', res.data.token)
+            // 页面跳转
+            this.$router.push('/home')
           }
         } else {
           console.log('error submit!!')
