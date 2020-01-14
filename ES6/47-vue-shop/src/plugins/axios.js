@@ -10,6 +10,7 @@ axios.interceptors.request.use(
       // 如果配置了isLoading: false，则不显示loading
       showFullScreenLoading()
     }
+    config.headers.Authorization = window.sessionStorage.getItem('token')
     return config
   },
   error => {
