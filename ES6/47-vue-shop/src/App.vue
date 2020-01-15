@@ -1,6 +1,9 @@
 <template>
   <div id="app">
-    <router-view :uri="uri"></router-view>
+    <router-view
+      :currentUri="currentUri"
+      @clearCurrentUri="clearCurrentUri($event)"
+    ></router-view>
   </div>
 </template>
 
@@ -9,7 +12,7 @@ export default {
   name: 'app',
   data() {
     return {
-      uri: ''
+      currentUri: ''
     }
   },
   mounted() {
@@ -27,11 +30,14 @@ export default {
       console.log(window.location.hash)
       const currentHash = window.location.hash.slice(1)
       window.sessionStorage.setItem('activePath', currentHash)
-      this.uri = currentHash
+      this.currentUri = currentHash
       console.log('uri:' + this.uri)
       this.$router.push(currentHash).catch(err => {
         err
       })
+    },
+    clearCurrentUri() {
+      this.currentUri = ''
     }
   }
 }

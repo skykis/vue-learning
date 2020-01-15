@@ -40,7 +40,7 @@ export default {
     MenuItem
   },
   props: {
-    uri: String
+    currentUri: String
   },
   data() {
     return {
@@ -58,9 +58,9 @@ export default {
     }
   },
   watch: {
-    uri: function() {
-      if (this.uri !== '') {
-        this.activePath = this.uri
+    currentUri: function() {
+      if (this.currentUri !== '') {
+        this.activePath = this.currentUri
       }
     }
   },
@@ -89,6 +89,7 @@ export default {
     saveNavStatus(path) {
       window.sessionStorage.setItem('activePath', path)
       this.activePath = path
+      this.$emit('clearCurrentUri')
     }
   }
 }
