@@ -66,6 +66,9 @@ export default {
   },
   created() {
     this.getMenuList()
+    if (window.sessionStorage.getItem('activePath') !== '') {
+      this.activePath = window.sessionStorage.getItem('activePath')
+    }
   },
   methods: {
     logout() {
