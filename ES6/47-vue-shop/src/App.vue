@@ -27,11 +27,9 @@ export default {
   methods: {
     goBack() {
       // 该事件仅在浏览器后退按钮被点击时触发
-      console.log(window.location.hash)
       const currentHash = window.location.hash.slice(1)
       window.sessionStorage.setItem('activePath', currentHash)
       this.currentUri = currentHash
-      console.log('uri:' + this.uri)
       this.$router.push(currentHash).catch(err => {
         err
       })
