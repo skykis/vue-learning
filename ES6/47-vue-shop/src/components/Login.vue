@@ -74,7 +74,6 @@ export default {
         if (valid) {
           // async/await axios调后台接口得到返回解构后的data
           const { data: res } = await this.$axios.post('login', this.loginForm)
-          console.log(res)
           if (res.meta.status !== 200) {
             return this.$message.error('登录失败：' + res.meta.msg)
           } else {
@@ -85,7 +84,6 @@ export default {
             this.$router.push('/home')
           }
         } else {
-          console.log('error submit!!')
           return false
         }
       })
