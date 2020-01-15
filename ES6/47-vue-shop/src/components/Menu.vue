@@ -6,6 +6,8 @@
     active-text-color="#409EFF"
     unique-opened
     :collapse="isCollapse"
+    router
+    :default-active="activePath"
   >
     <!-- 一级菜单 -->
     <el-submenu
@@ -22,9 +24,10 @@
       </template>
       <!-- 二级菜单 -->
       <el-menu-item
-        :index="subMenu.id.toString()"
+        :index="'/' + subMenu.path"
         v-for="subMenu in item.children"
         :key="subMenu.id"
+        @click="$emit('saveNavStatus', '/' + subMenu.path)"
       >
         <!-- 二级菜单模板区域 -->
         <template slot="title">
@@ -32,8 +35,8 @@
           <i class="el-icon-menu"></i>
           <!-- 二级菜单文本 -->
           <span>{{ subMenu.authName }}</span>
-        </template></el-menu-item
-      >
+        </template>
+      </el-menu-item>
     </el-submenu>
   </el-menu>
 </template>
@@ -44,7 +47,8 @@ export default {
   props: {
     menuList: Array,
     icons: Object,
-    isCollapse: Boolean
+    isCollapse: Boolean,
+    activePath: String
   }
 }
 </script>

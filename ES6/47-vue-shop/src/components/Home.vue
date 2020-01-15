@@ -20,6 +20,8 @@
           :menuList="menuList"
           :icons="iconsObj"
           :isCollapse="isCollapse"
+          :activePath="activePath"
+          @saveNavStatus="saveNavStatus($event)"
         />
       </el-aside>
       <!-- 右侧内容主体 -->
@@ -37,6 +39,9 @@ export default {
   components: {
     MenuItem
   },
+  props: {
+    uri: String
+  },
   data() {
     return {
       menuList: [],
@@ -48,7 +53,15 @@ export default {
         '102': 'el-icon-s-order',
         '145': 'el-icon-s-data'
       },
-      isCollapse: false
+      isCollapse: false,
+      activePath: ''
+    }
+  },
+  watch: {
+    uri: function() {
+      if (this.uri !== '') {
+        this.activePath = this.uri
+      }
     }
   },
   created() {
@@ -71,6 +84,11 @@ export default {
     // 菜单折叠
     toggleCollapse() {
       this.isCollapse = !this.isCollapse
+    },
+    // 保存链接的激活状态
+    saveNavStatus(path) {
+      window.sessionStorage.setItem('activePath', path)
+      this.activePath = path
     }
   }
 }
