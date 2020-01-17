@@ -43,9 +43,10 @@ export default {
       }
     },
     setTitle(currentPath) {
-      if (currentPath === '/home') {
+      if (currentPath === '/home' || currentPath === '/welcome') {
         this.breadcrumb.top = 'Welcome'
         this.breadcrumb.second = ''
+        return
       }
       this.menuList.some(menu => {
         const flag = menu.children.some(submenu => {
