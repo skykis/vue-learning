@@ -26,6 +26,15 @@
       </el-aside>
       <!-- 右侧内容主体 -->
       <el-main>
+        <el-breadcrumb separator-class="el-icon-arrow-right">
+          <el-breadcrumb-item>
+            <a href="/" @click.prevent="toHome">首页</a>
+          </el-breadcrumb-item>
+          <el-breadcrumb-item>{{ breadcrumb.top }}</el-breadcrumb-item>
+          <el-breadcrumb-item v-if="breadcrumb.second !== ''">
+            {{ breadcrumb.second }}
+          </el-breadcrumb-item>
+        </el-breadcrumb>
         <router-view></router-view>
       </el-main>
     </el-container>
@@ -40,11 +49,12 @@ export default {
     MenuItem
   },
   props: {
-    currentUri: String
+    currentUri: String,
+    breadcrumb: Object,
+    menuList: Array
   },
   data() {
     return {
-      menuList: [],
       // 可以做成后台接口获取
       iconsObj: {
         '125': 'el-icon-user-solid',
@@ -65,7 +75,6 @@ export default {
     }
   },
   created() {
-    this.getMenuList()
     if (window.sessionStorage.getItem('activePath') !== '') {
       this.activePath = window.sessionStorage.getItem('activePath')
     }
@@ -74,14 +83,6 @@ export default {
     logout() {
       window.sessionStorage.clear()
       this.$router.push('/login')
-    },
-    async getMenuList() {
-      const { data: res } = await this.$axios.get('menus')
-      if (res.meta.status === 200) {
-        this.menuList = res.data
-      } else {
-        this.$message.error(res.meta.msg)
-      }
     },
     // 菜单折叠
     toggleCollapse() {
@@ -92,6 +93,11 @@ export default {
       window.sessionStorage.setItem('activePath', path)
       this.activePath = path
       this.$emit('clearCurrentUri')
+      this.$emit('setTitle', path)
+    },
+    toHome() {
+      this.$emit('setTitle', '/home')
+      this.$router.push('/home')
     }
   }
 }
