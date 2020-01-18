@@ -14,7 +14,9 @@ import {
   Submenu,
   MenuItem,
   Breadcrumb,
-  BreadcrumbItem
+  BreadcrumbItem,
+  Card,
+  Col
 } from 'element-ui'
 
 Vue.use(Button)
@@ -31,4 +33,6 @@ Vue.use(Submenu)
 Vue.use(MenuItem)
 Vue.use(Breadcrumb)
 Vue.use(BreadcrumbItem)
+Vue.use(Card)
+Vue.use(Col)
 Vue.prototype.$message = Message
