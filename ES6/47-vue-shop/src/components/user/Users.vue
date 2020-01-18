@@ -5,7 +5,13 @@
       <!-- 搜索与添加区域 -->
       <el-row :gutter="20">
         <el-col :span="12">
-          <el-input placeholder="请输入内容" v-model="queryInfo.query">
+          <el-input
+            placeholder="请输入内容"
+            v-model="queryInfo.query"
+            clearable
+            @clear="getUserList"
+          >
+            <template slot="prepend">用户名</template>
             <el-button
               slot="append"
               icon="el-icon-search"
@@ -27,7 +33,10 @@
         <el-table-column label="角色" prop="role_name" />
         <el-table-column label="状态">
           <template slot-scope="scope">
-            <el-switch v-model="scope.row.mg_state" disabled />
+            <el-switch
+              v-model="scope.row.mg_state"
+              @change="userStateChange(scope.row)"
+            />
           </template>
         </el-table-column>
         <el-table-column label="操作" width="180px">
@@ -85,7 +94,6 @@ export default {
       const { data: res } = await this.$axios.get('users', {
         params: this.queryInfo
       })
-      console.log(res)
       if (res.meta.status !== 200) {
         return this.$message.error('获取用户列表失败')
       } else {
@@ -102,6 +110,17 @@ export default {
     currentChange(newNum) {
       this.queryInfo.pagenum = newNum
       this.getUserList()
+    },
+    async userStateChange(userInfo) {
+      const { data: res } = await this.$axios.put(
+        `users/${userInfo.id}/state/${userInfo.mg_state}`
+      )
+      if (res.meta.status !== 200) {
+        userInfo.mg_state = !userInfo.mg_state
+        return this.$message.error('更新用户状态失败')
+      } else {
+        this.$message.success('更新用户状态成功')
+      }
     }
   }
 }
