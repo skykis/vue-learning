@@ -75,6 +75,7 @@ export default {
     }
   },
   created() {
+    this.$emit('getMenuList')
     if (window.sessionStorage.getItem('activePath') !== '') {
       this.activePath = window.sessionStorage.getItem('activePath')
     }
