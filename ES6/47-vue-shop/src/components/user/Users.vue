@@ -55,7 +55,12 @@
               @click="showEditDialog(scope.row.id)"
             />
             <!-- 删除 -->
-            <el-button type="danger" icon="el-icon-delete" size="mini" />
+            <el-button
+              type="danger"
+              icon="el-icon-delete"
+              size="mini"
+              @click="removeUserById(scope.row.id)"
+            />
             <!-- 分配角色 -->
             <el-tooltip
               class="item"
@@ -320,6 +325,30 @@ export default {
           return false
         }
       })
+    },
+    // 根据id删除用户信息
+    async removeUserById(id) {
+      // 弹框
+      const confirmResult = await this.$confirm(
+        '此操作将永久删除该用户, 是否继续?',
+        '提示',
+        {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }
+      ).catch(err => err)
+      if (confirmResult === 'confirm') {
+        const { data: res } = await this.$axios.delete(`users/${id}`)
+        if (res.meta.status !== 200) {
+          return this.$message.error('删除用户失败：' + res.meta.msg)
+        } else {
+          this.getUserList()
+          this.$message.success('删除用户成功')
+        }
+      } else {
+        this.$message.info('已取消删除')
+      }
     }
   }
 }
