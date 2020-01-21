@@ -18,7 +18,7 @@
       <!-- 一级菜单模板区域 -->
       <template slot="title">
         <!-- 一级菜单图标 -->
-        <i :class="icons[item.id]"></i>
+        <i :class="icons[item.id]" />
         <!-- 一级菜单文本 -->
         <span>{{ item.authName }}</span>
       </template>
@@ -32,7 +32,7 @@
         <!-- 二级菜单模板区域 -->
         <template slot="title">
           <!-- 二级菜单图标 -->
-          <i class="el-icon-menu"></i>
+          <i class="el-icon-menu" />
           <!-- 二级菜单文本 -->
           <span>{{ subMenu.authName }}</span>
         </template>

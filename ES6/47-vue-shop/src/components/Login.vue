@@ -18,7 +18,7 @@
           <el-input
             prefix-icon="el-icon-s-custom"
             v-model="loginForm.username"
-          ></el-input>
+          />
         </el-form-item>
         <!-- 密码 -->
         <el-form-item prop="password">
@@ -26,7 +26,7 @@
             type="password"
             prefix-icon="el-icon-key"
             v-model="loginForm.password"
-          ></el-input>
+          />
         </el-form-item>
         <!-- 按钮 -->
         <el-form-item class="btns">

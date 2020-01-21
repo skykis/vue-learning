@@ -6,6 +6,7 @@
       :menuList="menuList"
       @clearCurrentUri="clearCurrentUri($event)"
       @setTitle="setTitle($event)"
+      @getMenuList="getMenuList($event)"
     ></router-view>
   </div>
 </template>
@@ -19,9 +20,6 @@ export default {
       breadcrumb: { top: 'Welcome', second: '' },
       menuList: []
     }
-  },
-  created() {
-    this.getMenuList()
   },
   mounted() {
     if (window.history && window.history.pushState) {
