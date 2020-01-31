@@ -99,7 +99,7 @@
         :model="addForm"
         :rules="addFormRules"
         ref="addFormRef"
-        label-width="70px"
+        label-width="90px"
         status-icon
       >
         <el-form-item label="用户名" prop="username">
@@ -137,7 +137,7 @@
         :model="editForm"
         :rules="editFormRules"
         ref="editFormRef"
-        label-width="70px"
+        label-width="90px"
         status-icon
       >
         <el-form-item label="用户名">
