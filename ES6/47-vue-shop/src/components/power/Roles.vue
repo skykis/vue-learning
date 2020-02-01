@@ -13,7 +13,7 @@
         <el-table-column type="expand">
           <template slot-scope="scope">
             <el-row
-              :class="['bdBottom', i1 === 0 ? 'bdTop' : '']"
+              :class="['bdBottom', i1 === 0 ? 'bdTop' : '', 'vCenter']"
               v-for="(item1, i1) in scope.row.children"
               :key="item1.id"
             >
@@ -25,7 +25,7 @@
               <!-- 二三级权限 -->
               <el-col :span="19">
                 <el-row
-                  :class="[i2 === 0 ? '' : 'bdTop']"
+                  :class="[i2 === 0 ? '' : 'bdTop', 'vCenter']"
                   v-for="(item2, i2) in item1.children"
                   :key="item2.id"
                 >
@@ -279,5 +279,9 @@ export default {
 }
 .bdBottom {
   border-bottom: 1px solid #eee;
+}
+.vCenter {
+  display: flex;
+  align-items: center;
 }
 </style>
