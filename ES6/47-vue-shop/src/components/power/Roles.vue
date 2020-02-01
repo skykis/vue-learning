@@ -10,7 +10,11 @@
       </el-row>
       <el-table :data="rolesList" border stripe>
         <!-- 展开列 -->
-        <el-table-column type="expand" />
+        <el-table-column type="expand">
+          <template slot-scope="scope">
+            <pre>{{ scope.row }}</pre>
+          </template>
+        </el-table-column>
         <!-- 索引列 -->
         <el-table-column type="index" />
         <el-table-column label="角色名称" prop="roleName" />
@@ -60,7 +64,7 @@
         <el-form-item label="角色名称" prop="roleName">
           <el-input v-model="addForm.roleName"></el-input>
         </el-form-item>
-        <el-form-item label="角色描述">
+        <el-form-item label="角色描述" prop="roleDesc">
           <el-input v-model="addForm.roleDesc"></el-input>
         </el-form-item>
       </el-form>
@@ -92,7 +96,7 @@
         <el-form-item label="角色名称" prop="roleName">
           <el-input v-model="editForm.roleName"></el-input>
         </el-form-item>
-        <el-form-item label="角色描述">
+        <el-form-item label="角色描述" prop="roleDesc">
           <el-input v-model="editForm.roleDesc"></el-input>
         </el-form-item>
       </el-form>
@@ -117,7 +121,8 @@ export default {
       addFormRules: {
         roleName: [
           { required: true, message: '请输入角色名称', trigger: 'blur' }
-        ]
+        ],
+        roleDesc: []
       },
       editDialogVisible: false,
       // 添加用户的表单
@@ -126,7 +131,8 @@ export default {
       editFormRules: {
         roleName: [
           { required: true, message: '请输入角色名称', trigger: 'blur' }
-        ]
+        ],
+        roleDesc: []
       }
     }
   },
@@ -199,7 +205,11 @@ export default {
     },
     // 监听修改角色对话框的关闭事件
     editDialogClosed() {
-      this.$refs.editFormRef.resetFields()
+      // 有缺陷，表单初始化数据显示问题
+      this.editForm = {}
+      this.$nextTick(() => {
+        this.$refs.editFormRef.resetFields()
+      })
     },
     // 点击添加角色确定按钮
     editRole() {
