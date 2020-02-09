@@ -377,9 +377,9 @@ export default {
         }
       )
       if (res.meta.status !== 200) {
-        return this.$message.error('更新权限失败')
+        return this.$message.error('分配权限失败')
       } else {
-        this.$message.success('更新权限成功')
+        this.$message.success('分配权限成功')
         this.getRolesList()
         this.setRightDialogVisible = false
       }
